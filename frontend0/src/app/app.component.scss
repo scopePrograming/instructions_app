@@ -1,0 +1,16 @@
+p {
+    width: 300px;
+    height: 100px;
+    margin: 16px auto;
+    background: #ccc;
+    color: whitesmoke;
+    text-align: center;
+    &:hover {
+        a {
+            color: tomato;
+        }
+    }
+    a {
+        text-decoration: none;
+    }
+}
