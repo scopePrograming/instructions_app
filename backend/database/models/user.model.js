@@ -36,8 +36,7 @@ const userSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        minlength: 8,
-        maxlength: 30
+        minlength: 8
     },
     phone: {
         type: String,
@@ -47,6 +46,12 @@ const userSchema = mongoose.Schema({
         validate(value) { // We need to valid all world
             if (!validator.isMobilePhone(value,'ar-EG' )) throw new Error('invalid phone')
         }
+    },
+    userType: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user',
+        trim: true
     },
     imageName: {
         type: String,
@@ -98,7 +103,7 @@ userSchema.methods.generateAuthToken = async function() {
     const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT)
     user.tokens = this.tokens.concat({ token })
     await user.save()
-    return token;
+    return token
 }
 
 // Login 

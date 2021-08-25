@@ -27,8 +27,6 @@ const userLogin = async (req, res) => {
     try {
 
         let user = await User.logMeOn(req.body.email, req.body.password)
-                        
-
         let token = await user.generateAuthToken()
         console.log(token)
         res.status(200).send({
