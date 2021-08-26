@@ -5,6 +5,7 @@ const fs = require('fs')
 
 const Instructions = require('../database/models/instructions.model')
 const User = require('../database/models/user.model')
+const { pathToFileURL } = require('url')
 
 let fileName = ''
 
@@ -13,7 +14,8 @@ let fileName = ''
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { cb (null, 'uploads') },
     filename: function (req, file, cb) {
-        fileName = `${Date.now()}.${(file.originalname.split('.').pop())}`
+        // fileName = `${Date.now()}.${(file.originalname.split('.').pop())}`
+        fileName = `${Date.now()}_${file.originalname}`
         cb (null, fileName)
     }
 })
@@ -29,7 +31,7 @@ const addInstruction = async (req, res) => {
         let instruction = new Instructions({ ...req.body })
         instruction.fileName = fileName
         instruction.filePath = req.file.path
-              
+        
         await instruction.save()
         res.status(200).send({
             apiStatus: true,
@@ -46,9 +48,34 @@ const addInstruction = async (req, res) => {
     }
 }
 
+// Show all instructions
+const showAllInstructions = async (req, res) => {
+     try {
+        let instruction = await Instructions.find()
+        if (instruction == '') throw new Error(`Data not founded`)
+        res.status(200).send({
+            apiStatus: true,
+            success: instruction,
+            message: `All data for users`
+        })
+     }
+     catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Not found! Check data`
+        })
+    }
+}
+
+
+
+
+
 
 // Exports
 module.exports = {
     upload,
-    addInstruction
+    addInstruction,
+    showAllInstructions
 }

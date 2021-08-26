@@ -14,15 +14,13 @@ const auth = require('../middleware/auth')
 router.post(
     '/admin/addInstruction',
     auth.adminAuth,
-    // instructionController.upload.fields(
-    //     [
-    //         { name: "fileName", maxCount: 1 },
-    //         // { name: "FILES", maxCount: 5 }
-    //     ]
-    // ),
     instructionController.upload.single('fileName'),
     instructionController.addInstruction
 )
+
+
+// Show all instructions
+router.post('/admin/showInstructions', auth.adminAuth, instructionController.showAllInstructions)
 
 // To export router
 module.exports = router

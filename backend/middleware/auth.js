@@ -20,7 +20,7 @@ const adminAuth = async(req, res, next) => {
     } catch (error) {
         res.status(500).send({
             apiStatus: false,
-            result: error.message,
+            result: error.name,
             message: 'unauthorized'
         })
     }
