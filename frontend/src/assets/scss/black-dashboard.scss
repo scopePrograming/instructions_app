@@ -1,20 +1,4 @@
-
-/*
- =========================================================
- * Black Dashboard Angular - v1.3.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/black-dashboard-angular
- * Copyright 2020 Creative Tim (https://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
- // Core
+// Core
 
 @import "black-dashboard/custom/functions";
 @import "black-dashboard/bootstrap/functions";
@@ -25,7 +9,7 @@
 @import "black-dashboard/custom/mixins";
 @import "black-dashboard/bootstrap/mixins";
 
- // Bootstrap components
+// Bootstrap components
 
 @import "black-dashboard/bootstrap/root";
 @import "black-dashboard/bootstrap/reboot";
@@ -60,27 +44,26 @@
 @import "black-dashboard/bootstrap/utilities";
 @import "black-dashboard/bootstrap/print";
 
- // Custom components
+// Custom components
 
- @import "black-dashboard/custom/alerts.scss";
- @import "black-dashboard/custom/buttons.scss";
- @import "black-dashboard/custom/dropdown.scss";
- @import "black-dashboard/custom/footer.scss";
- @import "black-dashboard/custom/forms.scss";
- @import "black-dashboard/custom/images.scss";
- @import "black-dashboard/custom/modal.scss";
- @import "black-dashboard/custom/navbar.scss";
- @import "black-dashboard/custom/type.scss";
- @import "black-dashboard/custom/tables";
- @import "black-dashboard/custom/checkboxes-radio";
- @import "black-dashboard/custom/fixed-plugin";
- @import "black-dashboard/custom/sidebar-and-main-panel.scss";
- @import "black-dashboard/custom/misc.scss";
- @import "black-dashboard/custom/rtl.scss";
- @import "black-dashboard/custom/input-group.scss";
+@import "black-dashboard/custom/alerts.scss";
+@import "black-dashboard/custom/buttons.scss";
+@import "black-dashboard/custom/dropdown.scss";
+@import "black-dashboard/custom/footer.scss";
+@import "black-dashboard/custom/forms.scss";
+@import "black-dashboard/custom/images.scss";
+@import "black-dashboard/custom/modal.scss";
+@import "black-dashboard/custom/navbar.scss";
+@import "black-dashboard/custom/type.scss";
+@import "black-dashboard/custom/tables";
+@import "black-dashboard/custom/checkboxes-radio";
+@import "black-dashboard/custom/fixed-plugin";
+@import "black-dashboard/custom/sidebar-and-main-panel.scss";
+@import "black-dashboard/custom/misc.scss";
+@import "black-dashboard/custom/rtl.scss";
+@import "black-dashboard/custom/input-group.scss";
 
-
- // Vendor / Plugins
+// Vendor / Plugins
 
 @import "black-dashboard/custom/vendor/plugin-perfect-scrollbar.scss";
 @import "black-dashboard/custom/vendor/plugin-animate-bootstrap-notify.scss";
@@ -91,7 +74,7 @@
 
 // Cards
 
-@import 'black-dashboard/custom/card';
+@import "black-dashboard/custom/card";
 @import "black-dashboard/custom/cards/card-chart";
 @import "black-dashboard/custom/cards/card-map";
 @import "black-dashboard/custom/cards/card-user";
@@ -100,4 +83,4 @@
 
 // Angular Differences
 
-@import "black-dashboard/angular-differences/angular-differences"
+@import "black-dashboard/angular-differences/angular-differences";

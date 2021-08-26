@@ -3,6 +3,8 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
+import { Notfound404Component } from './pages/notfound404/notfound404.component';
+
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
@@ -21,7 +23,8 @@ const routes: Routes = [
         loadChildren: () => import ("./layouts/admin-layout/admin-layout.module").then(m => m.AdminLayoutModule)
       }
     ]
-  }, {
+  },
+  {
     path: "",
     component: AuthLayoutComponent,
     children: [
@@ -33,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "dashboard"
+    component: Notfound404Component,
+    // redirectTo: "notfound404"
   }
 ];
 

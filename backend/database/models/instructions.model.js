@@ -26,20 +26,30 @@ const instructionSchema = mongoose.Schema({
         minlength: 3,
         maxlength: 1000
     },
-    file: [
+    fileName: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    filePath: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    // Tsting array files
+    files: [
         {
-            name: {
+            fileName: {
                 type: String,
                 trim: true,
                 required: true,
             },
-            path: {
+            filePath: {
                 type: String,
                 trim: true,
                 required: true,
             }
-        }
-        
+        }  
     ]
 }, { timestamps: true })
 
