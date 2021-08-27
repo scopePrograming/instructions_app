@@ -39,7 +39,8 @@ const userAuth = async(req, res, next) => {
         req.user = user
         req.token = token
         next()
-    } catch (error) {
+    }
+    catch (error) {
         res.status(500).send({
             apiStatus: false,
             result: error.message,
@@ -60,7 +61,8 @@ const generalAuth = async(req, res, next) => {
         req.user = user
         req.token = token
         next()
-    } catch (e) {
+    }
+    catch (e) {
         res.status(500).send({
             status: false,
             error: e.message,

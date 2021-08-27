@@ -6,11 +6,9 @@ const fs = require('fs')
 const Instructions = require('../database/models/instructions.model')
 const User = require('../database/models/user.model')
 
-
 let fileName = ''
 
 // Uplaoded file
-// const uploadedFiles = () => {
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { cb (null, 'uploads') },
     filename: function (req, file, cb) {
@@ -20,10 +18,34 @@ const storage = multer.diskStorage({
     }
 })
 const uploadFile = multer({ storage })
-    // return upload
-// }
 
-// Replay on the users (add instruction)
+// Download files by users
+const downloadFile = async (req, res) => {
+    try {
+        let fileName = req.params.fileName
+        
+        await req.user.populate({
+            path: 'instructionUser',
+        }).execPopulate()
+        let data = req.user.instructionUser
+        data.forEach(instruct => {
+            if (instruct.fileName == req.params.fileName) res.download(`./uploads/${fileName}`)
+        })
+        // res.status(200).send({
+        //     apiStatus: true,
+        //     message: `File downloded`
+        // })
+    }
+    catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Can't download file`
+        })
+    }
+}
+
+// Replay on the users (add instruction) (by admin)
 const addInstruction = async (req, res) => {
     try {
         let user = await User.findById(req.body.user_id)
@@ -48,7 +70,7 @@ const addInstruction = async (req, res) => {
     }
 }
 
-// Show all instructions
+// Show all instructions (by admin)
 const showAllInstructions = async (req, res) => {
      try {
         let instruction = await Instructions.find()
@@ -69,7 +91,7 @@ const showAllInstructions = async (req, res) => {
     }
 }
 
-// Show all instructions for one user
+// Show all instructions for one user (by admin)
 const showAllInstructionsForUser = async (req, res) => {
     try {
         let id = req.params.id
@@ -90,7 +112,30 @@ const showAllInstructionsForUser = async (req, res) => {
     }
 }
 
-// Show single instruction
+// Show all instructions for you (by user)
+const showAllInstructionsUser = async (req, res) => {
+    try {
+        await req.user.populate({
+            path: 'instructionUser',
+        }).execPopulate()
+        let data = req.user.instructionUser
+        
+        res.status(200).send({
+            apiStatus: true,
+            success: data,
+            message: `Instructions this user`
+        })
+    }
+    catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Check data!`
+        })
+    }
+}
+
+// Show single instruction (by admin)
 const showSingleInstruction = async (req, res) => {
      try {
         let id = req.params.id
@@ -112,7 +157,7 @@ const showSingleInstruction = async (req, res) => {
     }
 }
 
-// Edit single instruction
+// Edit single instruction (by admin)
 const editSingleInstruction = async (req, res) => {
     try {
         let id = req.params.id
@@ -149,7 +194,7 @@ const editSingleInstruction = async (req, res) => {
     }
 }
 
-// Delete single instruction
+// Delete single instruction (by admin)
 const deleteSingleInstruction = async (req, res) => {
     try {
         let id = req.params.id
@@ -175,10 +220,14 @@ const deleteSingleInstruction = async (req, res) => {
 // Exports
 module.exports = {
     uploadFile,
+    downloadFile,
+
     addInstruction,
 
     showAllInstructions,
     showAllInstructionsForUser,
+    showAllInstructionsUser,
+    
     showSingleInstruction,
 
     editSingleInstruction,

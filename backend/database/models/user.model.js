@@ -68,13 +68,14 @@ const userSchema = mongoose.Schema({
     ]
 }, { timestamps: true })
 
+// Relations by collection schema
 userSchema.virtual('instructionUser', {
-    ref:'Instruction',
+    ref:'Instructions',
     localField: '_id',
     foreignField: 'user_id'
 })
 
-//not show password
+// not show password
 userSchema.methods.toJSON = function() {
     let user = this.toObject()
     itemsHidden = ['passsword']

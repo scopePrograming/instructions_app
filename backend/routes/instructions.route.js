@@ -21,6 +21,12 @@ router.post(
 // Show all instructions
 router.post('/admin/showInstructions', auth.adminAuth, instructionController.showAllInstructions)
 
+// Show all instructions for user (by user)
+router.post('/user/showInstruction', auth.userAuth, instructionController.showAllInstructionsUser)
+
+// Download files by users
+router.get('/user/:id/fileDownload/:fileName', auth.userAuth, instructionController.downloadFile)
+
 // Show all instructions for one user
 router.get('/admin/showInstructionsUser/:id', auth.adminAuth, instructionController.showAllInstructionsForUser)
 
