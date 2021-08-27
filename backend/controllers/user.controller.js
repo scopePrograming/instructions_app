@@ -79,7 +79,7 @@ const showSingleUser = async (req, res) => {
     } catch (error) {
         res.status(500).send({
             apiStatus: false,
-            result: error,
+            result: error.message,
             message: `There is no data`
         })
     }
@@ -107,7 +107,7 @@ const deleteUser = async (req, res) => {
 const deleteUserByAdmin = async (req, res) => {
     try {
         let id = req.params.id
-        if (id == req.user._id) throw new Error()
+        if (id == req.user._id) throw new Error(`Your admin can't delete your self`)
         let data = await User.findByIdAndDelete(id)
         if (!data) throw new Error(`Data not founded of user`)
         res.status(200).send({

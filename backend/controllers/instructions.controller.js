@@ -5,7 +5,7 @@ const fs = require('fs')
 
 const Instructions = require('../database/models/instructions.model')
 const User = require('../database/models/user.model')
-const { pathToFileURL } = require('url')
+
 
 let fileName = ''
 
@@ -19,15 +19,15 @@ const storage = multer.diskStorage({
         cb (null, fileName)
     }
 })
-const upload = multer({ storage })
+const uploadFile = multer({ storage })
     // return upload
 // }
 
-// Replay on the users
+// Replay on the users (add instruction)
 const addInstruction = async (req, res) => {
     try {
         let user = await User.findById(req.body.user_id)
-        if (user == null) throw new Error(`User not founded`)
+        if (!user) throw new Error(`User not founded`)
         let instruction = new Instructions({ ...req.body })
         instruction.fileName = fileName
         instruction.filePath = req.file.path
@@ -42,7 +42,7 @@ const addInstruction = async (req, res) => {
     catch (error) {
         res.status(500).send({
             apiStatus: false,
-            result: error,
+            result: error.message,
             message: `Check data to insert`
         })
     }
@@ -52,7 +52,8 @@ const addInstruction = async (req, res) => {
 const showAllInstructions = async (req, res) => {
      try {
         let instruction = await Instructions.find()
-        if (instruction == '') throw new Error(`Data not founded`)
+        if (instruction == '') throw new Error(`Data not founded, Please insert any data`)
+        
         res.status(200).send({
             apiStatus: true,
             success: instruction,
@@ -68,14 +69,119 @@ const showAllInstructions = async (req, res) => {
     }
 }
 
+// Show all instructions for one user
+const showAllInstructionsForUser = async (req, res) => {
+    try {
+        let id = req.params.id
+        let data = await Instructions.find({ user_id: id })
+        if (data == '') throw new Error(`The instructions not found`)
+        res.status(200).send({
+            apiStatus: true,
+            success: data,
+            message: `Instructions this user`
+        })
+    }
+    catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Check data!`
+        })
+    }
+}
 
+// Show single instruction
+const showSingleInstruction = async (req, res) => {
+     try {
+        let id = req.params.id
+        let data = await Instructions.findById(id)
+        if (!data) throw new Error(`The instructions not found`)
 
+        res.status(200).send({
+            apiStatus: true,
+            success: data,
+            message: `this single instruction`
+        })
+    }
+    catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Check data! to show`
+        })
+    }
+}
 
+// Edit single instruction
+const editSingleInstruction = async (req, res) => {
+    try {
+        let id = req.params.id
+        let data = await Instructions.findById(id)
+        if (!data) throw new Error(`The instruction not found`)
+        
+        let objkeys = Object.keys(req.body)
+        if (objkeys.length == 0) throw new Error(`Please insert data`)
+    
+        let allowUpdate = ['title', 'description', 'fileName']
+        let validUpdate = objkeys.every(instruct => allowUpdate.includes(instruct))
 
+        if (!validUpdate) throw new Error(`Allowed update ${allowUpdate} only`)
+    
+        let oldFileName = data.fileName
+        data.fileName = fileName
+        data.filePath = req.file.path
+        objkeys.forEach(instruct => data[instruct] = req.body[instruct])
+
+        fs.unlink(`uploads/${oldFileName}`, (error) => { if (error) `Error file` })
+
+        await data.save()
+        res.status(200).send({
+            apiStatus: true,
+            message: `Updated success`
+        })
+    } 
+    catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Check data to update`
+        })
+    }
+}
+
+// Delete single instruction
+const deleteSingleInstruction = async (req, res) => {
+    try {
+        let id = req.params.id
+        let data = await Instructions.findByIdAndDelete(id)
+        
+        if (!data) throw new Error(`The instruction not found`)
+        fs.unlink(`uploads/${data.fileName}`, (error) => { if (error) `Error file` })
+        res.status(200).send({
+            apiStatus: true,
+            success: data,
+            message: `Deleted Done`
+        })
+    }
+    catch (error) {
+        res.status(500).send({
+            apiStatus: false,
+            result: error.message,
+            message: `Can't delete`
+        })
+    }
+}
 
 // Exports
 module.exports = {
-    upload,
+    uploadFile,
     addInstruction,
-    showAllInstructions
+
+    showAllInstructions,
+    showAllInstructionsForUser,
+    showSingleInstruction,
+
+    editSingleInstruction,
+
+    deleteSingleInstruction
 }
