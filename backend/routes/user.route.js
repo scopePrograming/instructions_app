@@ -20,7 +20,7 @@ router.post('/user/login', userController.userLogin)
 router.post('/user/all', auth.adminAuth, userController.showAllUser)
 
 // Show single user
-router.get('/user/single/:id', auth.generalAuth, userController.showSingleUser)
+router.get('/user/single/:id', auth.adminAuth, userController.showSingleUser)
 
 // delete your self (user)
 router.delete('/user/delete', auth.userAuth, userController.deleteUser)
