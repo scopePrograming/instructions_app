@@ -6,11 +6,12 @@ import { LoginComponent } from './admin/login/login.component';
 import { AddinstructionsComponent } from './admin/pages/instructions/addinstructions/addinstructions.component';
 import { ShowallusersComponent } from './admin/pages/users/showallusers/showallusers.component';
 import { AuthGuard } from './helper/auth.guard';
+import { LogoutGuard } from './helper/logout.guard';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
-  { path: 'login', component: LoginComponent},
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     component: AdminComponent, canActivate: [AuthGuard],
@@ -19,10 +20,10 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'instructions', component: AddinstructionsComponent },
       { path: 'users', component: ShowallusersComponent },
-      
+
     ]
   },
-  {path: '**', component: NotfoundpageComponent}
+  { path: '**', component: NotfoundpageComponent }
 ];
 
 @NgModule({
