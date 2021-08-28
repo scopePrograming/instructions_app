@@ -11,6 +11,7 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { ServiceService } from './admin/service.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InstructionsInterceptor } from './instructions.interceptor';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 
 

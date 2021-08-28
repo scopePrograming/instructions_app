@@ -1,7 +1,26 @@
-<p>
-    <a routerLink="/home">HOME</a>
-</p>
-<p>
-    <a routerLink="/instructions">instructions</a>
-</p>
+<mat-nav-list class="text-center">
+    <mat-card>
+        <span class="material-icons text-center">
+            account_circle
+        </span>
+        <mat-card-content>
+            <mat-card-title>My name</mat-card-title>
+            <mat-card-subtitle>name@example.com</mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+
+    <h2 matSubheader>Pages</h2>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/home" class="mb-2">
+        <mat-icon>home</mat-icon>
+        <span class="mx-2">الرئيسية</span>
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/users" class="mb-2">
+        <mat-icon>people</mat-icon>
+        <span class="mx-2">العملاء</span>
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/instructions" class="mb-2">
+        <mat-icon>integration_instructions</mat-icon>
+        <span class="mx-2">التعليمات</span>
+    </a>
+</mat-nav-list>
 

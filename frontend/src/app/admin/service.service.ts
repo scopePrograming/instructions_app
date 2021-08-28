@@ -13,4 +13,12 @@ export class ServiceService {
   adminLogin(adminData: any): Observable<any> {
     return this._http.post(`${this.commonURL}login`, adminData)
   }
+
+  adminLogout(): Observable<any> {
+    return this._http.post(`${this.commonURL}logout`, null)
+  }
+
+  adminLogoutAll(): Observable<any> {
+    return this._http.post(`${this.commonURL}logoutAll`, null)
+  }
 }

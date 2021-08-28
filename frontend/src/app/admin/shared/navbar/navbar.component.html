@@ -1,1 +1,41 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button class="example-icon" value="right" aria-label="Text align right" (click)="toggleSideBar()">
+            <mat-icon>format_align_right</mat-icon>
+        </button>
+        <span>لوحة التحكم</span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20" class="m-0">
+                <li>
+                    <button mat-icon-button>
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>notifications</mat-icon>
+                    </button>
+
+                    <!-- <button mat-icon-button>
+                        <mat-icon>logout</mat-icon>
+                    </button> -->
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon>person_outline</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>preview</mat-icon> الملف الشخصي
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>edit</mat-icon> تعديل
+                        </button>
+                        <button mat-menu-item (click)="logoutAll()">
+                            <mat-icon>logout</mat-icon> تسجيل الخروج
+                        </button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </div>
+        <!-- <span class="example-spacer"></span>
+        login -->
+    </mat-toolbar-row>
+</mat-toolbar>
