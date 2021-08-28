@@ -3,21 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './admin/home/home.component';
 import { LoginComponent } from './admin/login/login.component';
+import { AddinstructionsComponent } from './admin/pages/instructions/addinstructions/addinstructions.component';
 import { ShowallusersComponent } from './admin/pages/users/showallusers/showallusers.component';
+import { AuthGuard } from './helper/auth.guard';
+import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  { path: '', component: LoginComponent},
+  { path: 'login', component: LoginComponent},
   {
     path: '',
-    component: AdminComponent,
+    component: AdminComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
-      { path: 'showallusers', component: ShowallusersComponent },    
+      { path: 'home', component: HomeComponent },
+      { path: 'instructions', component: AddinstructionsComponent },
     ]
-  }
+  },
+  {path: '**', component: NotfoundpageComponent}
 ];
 
 @NgModule({

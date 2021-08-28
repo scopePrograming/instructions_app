@@ -1,1 +1,52 @@
-<p>login works!</p>
+<section class="login">
+    <div class="container">
+        <div class="row">
+            <mat-card class="col-4 m-auto">
+                <mat-card-title class="text-center mb-3 py-1">تسجيل الدخول</mat-card-title>
+                <form class="example-container" [formGroup]="adminData" (ngSubmit)="adminLoginForm()" autocomplete="off">
+                    <mat-form-field appearance="outline" class="mb-3">
+                        <mat-label>أدخل الإيميل</mat-label>
+                        <input matInput placeholder="pat@example.com" formControlName='email' required />
+                        
+                        <mat-error *ngIf="isSubmited || (email?.invalid && (email?.dirty || email?.touched))">
+                            <ul>
+                                <li *ngIf="email?.errors?.required">
+                                    برجاء ملء الحقل
+                                </li>
+                                <li *ngIf="email?.errors?.email">
+                                    أدخل إيميل صحيح
+                                </li>
+                            </ul>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="mb-3">
+                        <mat-label>كلمة المرور</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required />
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide" type="button">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>                    
+                        <mat-error *ngIf="isSubmited || (password?.invalid && (password?.dirty || password?.touched))">
+                            <ul>
+                                <li *ngIf="password?.errors?.required">
+                                    برجاء ملء الحقل
+                                </li>
+                                <li *ngIf="password?.errors?.minlength">
+                                    كلمة المرور أقل من 3 أحرف
+                                </li>
+                                <li *ngIf="password?.errors?.maxlength">
+                                    كلمة المرور أقل من 20 حرف
+                                </li>
+                            </ul>
+                        </mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="btn_login mb-3 py-1 w-100">تسجيل الدخول</button>
+                </form>
+            </mat-card>
+        </div>
+        
+    </div>
+    
+</section>
+
+

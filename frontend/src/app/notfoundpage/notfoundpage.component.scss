@@ -1,0 +1,9 @@
+.not_found {
+  background: #efefef;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  img {
+    object-fit: cover;
+  }
+}
