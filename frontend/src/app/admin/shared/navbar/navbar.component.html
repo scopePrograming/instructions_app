@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <button mat-icon-button class="example-icon" value="right" aria-label="Text align right" (click)="toggleSideBar()">
-            <mat-icon>format_align_right</mat-icon>
+        <button mat-icon-button class="example-icon" value="left" aria-label="Text align right" (click)="toggleSideBar()">
+            <mat-icon>format_align_left</mat-icon>
         </button>
-        <span>لوحة التحكم</span>
+        <span>Dashboard</span>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20" class="m-0">
@@ -23,19 +23,17 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item>
-                            <mat-icon>preview</mat-icon> الملف الشخصي
+                            <mat-icon>preview</mat-icon> Profile 
                         </button>
                         <button mat-menu-item>
-                            <mat-icon>edit</mat-icon> تعديل
+                            <mat-icon>edit</mat-icon> Edit
                         </button>
                         <button mat-menu-item (click)="logoutAll()">
-                            <mat-icon>logout</mat-icon> تسجيل الخروج
+                            <mat-icon>logout</mat-icon> Logout 
                         </button>
                     </mat-menu>
                 </li>
             </ul>
         </div>
-        <!-- <span class="example-spacer"></span>
-        login -->
     </mat-toolbar-row>
 </mat-toolbar>

@@ -17,16 +17,16 @@ router.post('/user/register', userController.userRegister)
 router.post('/user/login', userController.userLogin)
 
 // Show all user by admin
-router.post('/user/all', auth.adminAuth, userController.showAllUser)
+router.post('/admin/all', auth.adminAuth, userController.showAllUser)
 
 // Show single user
-router.get('/user/single/:id', auth.adminAuth, userController.showSingleUser)
+router.get('/admin/single/:id', auth.adminAuth, userController.showSingleUser)
 
 // delete your self (user)
 router.delete('/user/delete', auth.userAuth, userController.deleteUser)
 
 // delete users by admin
-router.delete('/user/delUser/:id', auth.adminAuth, userController.deleteUserByAdmin)
+router.delete('/admin/delUser/:id', auth.adminAuth, userController.deleteUserByAdmin)
 
 // logout any user or admin
 router.post('/user/logout', auth.generalAuth, userController.logOut)

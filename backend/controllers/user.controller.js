@@ -46,7 +46,7 @@ const userLogin = async (req, res) => {
 // Show all users
 const showAllUser = async (req, res) => {
     try {
-        let allUsers = await User.find()
+        let allUsers = await User.find({userType: 'user'})
         if (!allUsers) throw new Error()
         res.status(200).send({
             status: true,

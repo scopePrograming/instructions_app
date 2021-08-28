@@ -17,6 +17,9 @@ import { ShowsingleuserComponent } from './pages/users/showsingleuser/showsingle
 import { ShowallinstructionsComponent } from './pages/instructions/showallinstructions/showallinstructions.component';
 import { AddinstructionsComponent } from './pages/instructions/addinstructions/addinstructions.component';
 import { HomeComponent } from './home/home.component';
+// Flex layout
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 // Angular Material
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -51,7 +54,8 @@ import { MatCardModule } from '@angular/material/card'
     ReactiveFormsModule,
     // Shared
     SharedModule,
-
+    // Flex layout
+    FlexLayoutModule,
     // Materail modules
     MatSidenavModule,
     MatDividerModule,

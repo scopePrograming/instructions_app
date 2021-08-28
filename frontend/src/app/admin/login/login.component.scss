@@ -1,5 +1,3 @@
-$main-font: "Cairo", sans-serif;
-
 .login {
   min-height: 100vh;
   padding: 2rem 1.5rem;
@@ -12,24 +10,23 @@ $main-font: "Cairo", sans-serif;
     width: 20rem;
     margin: 1.5rem auto;
     padding: 1rem 1.5rem;
-    font-family: $main-font;
-
+    font-family: var(--font-main);
     mat-form-field {
       width: 100%;
       mat-label {
-        font-family: $main-font;
+        font-family: var(--font-main);
       }
       ul {
         margin: 0;
         padding: 0.3rem 0;
         li {
           list-style: none;
-          font-family: $main-font;
+          font-family: var(--font-main);
         }
       }
     }
     .btn_login {
-      font-family: $main-font;
+      font-family: var(--font-main);
     }
   }
 }

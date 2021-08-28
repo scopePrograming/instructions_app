@@ -7,8 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class ServiceService {
   private commonURL = `http://localhost:3000/user/`
+  private commonAdminURL = `http://localhost:3000/admin/`
   constructor(private _http: HttpClient) { }
 
+  showAllUsers(): Observable<any> {
+    return this._http.post(`${this.commonAdminURL}all`, null)
+  }
+
+  showSingleUser(id: any): Observable<any> {
+    return this._http.get(`${this.commonAdminURL}single/${id}`)
+  }
+
+  deleteUserByAdmin(id: any): Observable<any> {
+    return this._http.delete(`${this.commonAdminURL}delUser/${id}`)
+  }
 
   adminLogin(adminData: any): Observable<any> {
     return this._http.post(`${this.commonURL}login`, adminData)

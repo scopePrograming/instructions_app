@@ -5,6 +5,7 @@ import { HomeComponent } from './admin/home/home.component';
 import { LoginComponent } from './admin/login/login.component';
 import { AddinstructionsComponent } from './admin/pages/instructions/addinstructions/addinstructions.component';
 import { ShowallusersComponent } from './admin/pages/users/showallusers/showallusers.component';
+import { ShowsingleuserComponent } from './admin/pages/users/showsingleuser/showsingleuser.component';
 import { AuthGuard } from './helper/auth.guard';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 
@@ -19,6 +20,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'instructions', component: AddinstructionsComponent },
       { path: 'users', component: ShowallusersComponent },
+      { path: 'singleUser/:id', component: ShowsingleuserComponent },
+      // { path: 'DeleteUser', component: ShowsingleuserComponent }
 
     ]
   },
