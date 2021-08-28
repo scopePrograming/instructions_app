@@ -10,7 +10,7 @@ export class LogoutGuard implements CanActivate {
   constructor(private _auth: AuthService, private _router: Router) { }
 
   canActivate() {
-    if (this._auth.IsLoggedIn()) {
+    if (!this._auth.IsLoggedIn()) {
       return true
     }
 

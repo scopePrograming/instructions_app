@@ -6,7 +6,6 @@ import { LoginComponent } from './admin/login/login.component';
 import { AddinstructionsComponent } from './admin/pages/instructions/addinstructions/addinstructions.component';
 import { ShowallusersComponent } from './admin/pages/users/showallusers/showallusers.component';
 import { AuthGuard } from './helper/auth.guard';
-import { LogoutGuard } from './helper/logout.guard';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 
 const routes: Routes = [
