@@ -1,0 +1,27 @@
+.example-card {
+  margin: 0.5rem 0;
+  max-width: 20rem;
+}
+.instruction_user {
+  max-width: 25rem;
+  border-left: 2px solid var(--main-color-blue);
+}
+
+.user_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  &-details {
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: 0.2rem;
+    margin-bottom: 0.5rem;
+    background: #f1efef;
+    color: #111;
+    font-weight: 500;
+    letter-spacing: 1px;
+    mat-icon {
+      color: rgb(206, 201, 201);
+    }
+  }
+}

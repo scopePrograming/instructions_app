@@ -33,4 +33,32 @@ export class ServiceService {
   adminLogoutAll(): Observable<any> {
     return this._http.post(`${this.commonURL}logoutAll`, null)
   }
+
+
+  //-- Services to instructions --//
+  addInstruction(data: any): Observable<any> {
+    return this._http.post(`${this.commonAdminURL}addInstruction`, data)
+  }
+
+  showInstructions(): Observable<any> {
+    return this._http.post(`${this.commonAdminURL}showInstructions`, null)
+  }
+
+  showSingleInstruction(id: any): Observable<any> {
+    return this._http.get(`${this.commonAdminURL}showSingleInstruction/${id}`)
+  }
+
+  showInstructionsUser(id: any): Observable<any> {
+    return this._http.get(`${this.commonAdminURL}showInstructionsUser/${id}`)
+  }
+
+  editSingleInstruction(id: any): Observable<any> {
+    return this._http.patch(`${this.commonAdminURL}editSingleInstruction/${id}`, null)
+  }
+
+  deleteSingleInstruction(id: any): Observable<any> {
+    return this._http.delete(`${this.commonAdminURL}deleteSingleInstruction/${id}`)
+  }
+
+
 }

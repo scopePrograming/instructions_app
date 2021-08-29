@@ -1,1 +1,119 @@
-<p>showsingleuser works!</p>
+
+<mat-card-title>{{headTitle}}</mat-card-title>
+
+<mat-tab-group class="my-1">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">
+                account_box
+            </mat-icon>
+            <span class="mx-1">User account</span>
+        </ng-template>
+        
+        <mat-card class="example-card">
+            <mat-card-title>{{singleUser.firstName}}</mat-card-title>
+            <mat-card-subtitle>{{singleUser.email}}</mat-card-subtitle>
+        
+            <mat-card-actions>
+                <button mat-button>Show instructions</button>
+                <button mat-button>Replay</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">
+                accessibility
+            </mat-icon>
+            <span class="mx-1">User info</span>
+        </ng-template>
+
+            <mat-card class="example-card user_info">
+                <mat-card-content>
+                    <div class="user_info-details d-flex">
+                        <span>Gender</span>
+                        <mat-icon class="mx-1">
+                            arrow_right_alt
+                        </mat-icon>
+                        <span>Male</span>
+                    </div>
+                    <div class="user_info-details d-flex">
+                        <span>Age</span>
+                        <mat-icon class="mx-1">
+                            arrow_right_alt
+                        </mat-icon>
+                        <span>30</span>
+                    </div>
+
+                    <div class="user_info-details d-flex">
+                        <span>Height</span>
+                        <mat-icon class="mx-1">
+                            arrow_right_alt
+                        </mat-icon>
+                        <span>170</span>
+                    </div>
+                    <div class="user_info-details d-flex">
+                        <span>Weight</span>
+                        <mat-icon class="mx-1">
+                            arrow_right_alt
+                        </mat-icon>
+                        <span>90</span>
+                    </div>
+                    <div class="user_info-details d-flex">
+                        <span>Activity level</span>
+                        <mat-icon class="mx-1">
+                            arrow_right_alt
+                        </mat-icon>
+                        <span>Moderately active</span>
+                    </div>
+                    <div class="user_info-details d-flex">
+                        <span>Goal</span>
+                        <mat-icon class="mx-1">
+                            arrow_right_alt
+                        </mat-icon>
+                        <span>Loose Weight</span>
+                    </div>
+                </mat-card-content>
+                
+                <mat-card-actions class="px-2">
+                    <button mat-raised-button color="primary">Add instructions</button>
+                </mat-card-actions>
+            </mat-card>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">
+                integration_instructions
+           </mat-icon>
+            <span class="mx-1">User instructions</span>
+        </ng-template>
+        <div>{{msgCheck}}</div>
+        <ng-container *ngFor="let data of singleInstruction; let i=index;"> 
+            <mat-card class="example-card instruction_user">
+
+                <mat-card-subtitle>{{data.title}}</mat-card-subtitle>
+                <mat-card-content>
+                    {{data.description}}
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <a routerLink="/editinstruction/{{singleInstruction._id}}">
+                        <button mat-raised-button color="primary" aria-label="Example icon button with a home icon">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </a>
+                    <span class="mx-2"></span>
+                    <a routerLink="/deleteinstruction/{{singleInstruction._id}}" (click)="deleteByAdmin(singleInstruction._id)">
+                        <button mat-raised-button color="warn" aria-label="Example icon button with a home icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </a>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+            
+        
+    </mat-tab>
+</mat-tab-group>

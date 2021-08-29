@@ -107,7 +107,7 @@ const showAllInstructionsForUser = async (req, res) => {
         res.status(500).send({
             apiStatus: false,
             result: error.message,
-            message: `Check data!`
+            message: `Not found data!`
         })
     }
 }

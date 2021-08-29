@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceService } from 'src/app/admin/service.service';
 
@@ -16,52 +16,65 @@ export class AddinstructionsComponent implements OnInit {
 
   isSubmited: boolean = false
   flag: boolean = false
+  headTitle: String = 'Add instructions'
 
-  constructor(public _userService: ServiceService, private _router: Router) { }
-  adminData = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
+  
+  instructionData : FormGroup = this.fb.group({
+    // cat_id: ['',[Validators.required]],
+    title: ['',[Validators.required , Validators.minLength(3) , Validators.maxLength(100)]],
+    description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
+    fileName: ['', [Validators.required]],
+    
   })
 
-  ngOnInit(): void { }
+  constructor(private _Service: ServiceService , private _router:Router, private fb: FormBuilder) { }
 
-  adminLoginForm() {
-    let adminInfo: any = this.adminData.value
+  ngOnInit(): void {}
+
+  
+  uploadFile(event:any){
+    let file = event.target.files[0] 
+    this.instructionData.get('fileName')?.setValue(file)
+  }
+
+  addInstructionForm(){
+    let formData = new FormData()
+    formData.append('title', this.instructionData.get('title')?.value)
+    formData.append('description', this.instructionData.get('description')?.value)
+    formData.append('fileName', this.instructionData.get('fileName')?.value)
+
     this.isSubmited = true
-    if (this.adminData.valid) {
-      this._userService.adminLogin(adminInfo).subscribe(
+
+    if (this.instructionData.valid) {
+      
+      this._Service.addInstruction(formData).subscribe(
         res => { this.result = res },
-        (e) => {
+    
+        (e) => { 
           this.flag = false
-          this.msgCheck = e.error.message
+          this.msgCheck = e.error.message 
         },
+
         () => {
-          if (this.result?.success != "") {
+          if(this.result?.success != "") { 
             this.flag = true
             this.msgCheck = this.result.message
-            this.adminData.reset()
-            this.isSubmited = false
-
-            let token = this.result.success.token
-            localStorage.setItem('token', token)
-            localStorage.setItem('status', '1')
-            let typeUser = this.result.success.user.userType
-
-            typeUser == 'user' ?
-              this._router.navigate(['login']) :
-              this._router.navigate(['home'])
-          }
+            this.instructionData.reset()
+            this.isSubmited = false 
+            this._router.navigate(['/instructions'])
+          } 
         }
-
+    
       )
     }
   }
 
-  get email() {
-    return this.adminData.get('email')
+  get title() {
+    return this.instructionData.get('title')
   }
 
-  get password() {
-    return this.adminData.get('password')
+  get description() {
+    return this.instructionData.get('description')
   }
+  
 }

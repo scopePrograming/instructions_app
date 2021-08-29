@@ -33,7 +33,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ShowInstructionsUserComponent } from './pages/instructions/show-instructions-user/show-instructions-user.component';
+import { ShowSingleInstructionComponent } from './pages/instructions/show-single-instruction/show-single-instruction.component';
+import { EditSingleInstructionComponent } from './pages/instructions/edit-single-instruction/edit-single-instruction.component'
 
 
 
@@ -45,7 +49,10 @@ import { MatCardModule } from '@angular/material/card'
     ShowsingleuserComponent,
     ShowallinstructionsComponent,
     AddinstructionsComponent,
-    HomeComponent
+    HomeComponent,
+    ShowInstructionsUserComponent,
+    ShowSingleInstructionComponent,
+    EditSingleInstructionComponent
   ],
   imports: [
     CommonModule,
@@ -69,6 +76,7 @@ import { MatCardModule } from '@angular/material/card'
     MatInputModule,
     MatSortModule,
     MatCardModule,
+    MatTabsModule,
 
   ],
   providers: [
