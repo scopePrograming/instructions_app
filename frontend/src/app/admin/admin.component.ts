@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
@@ -7,14 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  sideBarOpen = true;
+  sideBarOpen = true
 
-  constructor() { }
+  constructor() {
+    
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.heddinSideBar()
+  }
+  
+  heddinSideBar() {
+    window.innerWidth > 991 ? this.sideBarOpen = true : this.sideBarOpen = false
+  }
 
   sideBarToggler(event: any) {
-    this.sideBarOpen = !this.sideBarOpen;
+    this.sideBarOpen = !this.sideBarOpen
   }
 
 }

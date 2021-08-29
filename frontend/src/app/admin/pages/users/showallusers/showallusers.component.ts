@@ -15,7 +15,7 @@ export class ShowallusersComponent implements OnInit {
   allUsers: any = []
   result: any = {}
   msgCheck: any = null
-  headTitle: string = 'All users '
+  headTitle: string = 'Users'
 
   // users: UserData[]
 

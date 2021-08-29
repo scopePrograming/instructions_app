@@ -15,7 +15,7 @@ export class ShowallinstructionsComponent implements OnInit {
   allInstructions: any = []
   result: any = {}
   msgCheck: any = null
-  headTitle: string = 'Add instructions '
+  headTitle: string = 'Instructions'
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['Title', 'Description', 'FileName' ,'Actions'];

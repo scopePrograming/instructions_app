@@ -11,7 +11,7 @@ import { ServiceService } from '../../service.service';
 export class NavbarComponent implements OnInit {
   checkStatus = localStorage.getItem('status')
 
-  @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
+  @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter()
   
   constructor(private _userService: ServiceService, private _router: Router) { }
 
@@ -19,12 +19,12 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleSideBar() {
-    this.toggleSideBarForMe.emit();
+    this.toggleSideBarForMe.emit()
     setTimeout(() => {
       window.dispatchEvent(
         new Event('resize')
-      );
-    }, 200);
+      )
+    }, 200)
   }
 
   logout() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from 'src/app/admin/service.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class AddinstructionsComponent implements OnInit {
   isSubmited: boolean = false
   flag: boolean = false
   headTitle: String = 'Add instructions'
-
+  userId: any = this.router.snapshot.paramMap.get('id')
   
   instructionData : FormGroup = this.fb.group({
     // cat_id: ['',[Validators.required]],
@@ -27,7 +27,7 @@ export class AddinstructionsComponent implements OnInit {
     
   })
 
-  constructor(private _Service: ServiceService , private _router:Router, private fb: FormBuilder) { }
+  constructor(private _Service: ServiceService , private _router:Router, private fb: FormBuilder,private router: ActivatedRoute ) { }
 
   ngOnInit(): void {}
 
@@ -39,6 +39,7 @@ export class AddinstructionsComponent implements OnInit {
 
   addInstructionForm(){
     let formData = new FormData()
+    formData.append('user_id', this.userId)
     formData.append('title', this.instructionData.get('title')?.value)
     formData.append('description', this.instructionData.get('description')?.value)
     formData.append('fileName', this.instructionData.get('fileName')?.value)

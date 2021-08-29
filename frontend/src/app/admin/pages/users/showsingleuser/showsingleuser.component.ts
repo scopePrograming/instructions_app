@@ -13,7 +13,7 @@ export class ShowsingleuserComponent implements OnInit {
   singleUser: any = []
   result: any = {}
   msgCheck: any = null
-  headTitle: string = 'Data of single user'
+  headTitle: string = 'Data of user'
  
   constructor(public _userService: ServiceService, private router: ActivatedRoute, private _router: Router) {
     this.getSingleUser()
@@ -40,7 +40,6 @@ export class ShowsingleuserComponent implements OnInit {
 
   getSingleInstruction() {
     let id = this.router.snapshot.paramMap.get('id')
-    
     this._userService.showInstructionsUser(id).subscribe(res => {
       this.result = res
       this.singleInstruction = this.result.success

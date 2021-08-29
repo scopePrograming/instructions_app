@@ -2,10 +2,6 @@
   margin: 0.5rem 0;
   max-width: 20rem;
 }
-.instruction_user {
-  max-width: 25rem;
-  border-left: 2px solid var(--main-color-blue);
-}
 
 .user_info {
   display: flex;
@@ -23,5 +19,17 @@
     mat-icon {
       color: rgb(206, 201, 201);
     }
+  }
+}
+.content_instruction_user {
+  display: grid;
+  grid-template-columns: repeat(2, 420px);
+  gap: 0.5rem;
+  @media all and (max-width: 991px) {
+    grid-template-columns: repeat(1, 320px);
+  }
+  .instruction_user {
+    width: 100vw;
+    border-left: 2px solid var(--main-color-blue);
   }
 }

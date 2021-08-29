@@ -25,7 +25,7 @@ const routes: Routes = [
       
       { path: 'instructions', component: ShowallinstructionsComponent },
       { path: 'showsingleinstruction/:id', component: ShowSingleInstructionComponent },
-      { path: 'Addinstruction', component: AddinstructionsComponent },
+      { path: 'addinstruction/:id', component: AddinstructionsComponent },
       { path: 'editinstruction/:id', component: EditSingleInstructionComponent },
       { path: 'showinstructionsuser/:id', component: ShowInstructionsUserComponent },
 
