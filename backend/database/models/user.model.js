@@ -7,6 +7,9 @@ const bcrypt = require('bcryptjs')
 // To used instruction
 const Instruction = require('./instructions.model')
 
+// To used userData
+const userInfo = require('./userInfo.model')
+
 // Create user schema
 const userSchema = mongoose.Schema({
     firstName: {
@@ -44,7 +47,7 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: [true, `Phone has token`],
         validate(value) { // We need to valid all world
-            if (!validator.isMobilePhone(value,'ar-EG' )) throw new Error('invalid phone')
+            if (!validator.isMobilePhone(value, 'ar-EG')) throw new Error('invalid phone')
         }
     },
     userType: {
@@ -70,13 +73,19 @@ const userSchema = mongoose.Schema({
 
 // Relations by collection schema
 userSchema.virtual('instructionUser', {
-    ref:'Instructions',
+    ref: 'Instructions',
+    localField: '_id',
+    foreignField: 'user_id'
+})
+
+userSchema.virtual('userInfo', {
+    ref: 'userInfo',
     localField: '_id',
     foreignField: 'user_id'
 })
 
 // not show password
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
     let user = this.toObject()
     itemsHidden = ['passsword']
     itemsHidden.forEach(item => {
@@ -86,7 +95,7 @@ userSchema.methods.toJSON = function() {
 }
 
 // Hashing password
-userSchema.pre('save', async function() {
+userSchema.pre('save', async function () {
     try {
         let user = this
         if (user.isModified('password')) {
@@ -99,7 +108,7 @@ userSchema.pre('save', async function() {
 })
 
 // addToken
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
     const user = this
     const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT)
     user.tokens = this.tokens.concat({ token })
@@ -108,7 +117,7 @@ userSchema.methods.generateAuthToken = async function() {
 }
 
 // Login 
-userSchema.statics.logMeOn = async(email, password) => {
+userSchema.statics.logMeOn = async (email, password) => {
     const user = await User.findOne({ email })
     if (!user) throw new Error('invalid email')
     const matchPass = await bcrypt.compare(password, user.password)

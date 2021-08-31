@@ -11,6 +11,7 @@ require('../database/connection')
 // To used router
 const userRoute = require('../routes/user.route')
 const instructionsRoute = require('../routes/instructions.route')
+const userInfoRoute = require('../routes/userInfo.route')
 
 // Fire to used express
 const app = express()
@@ -22,6 +23,7 @@ app.use(cors())
 // Used router 
 app.use(userRoute)
 app.use(instructionsRoute)
+app.use(userInfoRoute)
 
 // Exports
 module.exports = app
