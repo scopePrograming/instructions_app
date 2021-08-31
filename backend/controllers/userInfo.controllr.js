@@ -1,7 +1,6 @@
 // Requires
 const UserInfo = require('../database/models/userInfo.model')
 const User = require('../database/models/user.model')
-const userInfo = require('../database/models/userInfo.model')
 
 // add user info
 const addUserInfo = async (req, res) => {
