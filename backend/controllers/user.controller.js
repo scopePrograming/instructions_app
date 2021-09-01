@@ -1,5 +1,7 @@
 // Requires
 const User = require('../database/models/user.model')
+const UserInfo = require('../database/models/userInfo.model')
+const Instructions = require('../database/models/instructions.model')
 
 // Register users
 const userRegister = async (req, res) => {
@@ -46,7 +48,7 @@ const userLogin = async (req, res) => {
 // Show all users
 const showAllUser = async (req, res) => {
     try {
-        let allUsers = await User.find({userType: 'user'})
+        let allUsers = await User.find({ userType: 'user' })
         if (!allUsers) throw new Error()
         res.status(200).send({
             status: true,
@@ -88,6 +90,8 @@ const showSingleUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         await req.user.remove()
+        await Instructions.deleteMany({ user_id: req.user._id })
+        await UserInfo.deleteMany({ user_id: req.user._id })
         res.status(200).send({
             apiStatus: true,
             message: `Deleted Done`
@@ -109,6 +113,8 @@ const deleteUserByAdmin = async (req, res) => {
         if (id == req.user._id) throw new Error(`Your admin can't delete your self`)
         let data = await User.findByIdAndDelete(id)
         if (!data) throw new Error(`Data not founded of user`)
+        await Instructions.deleteMany({ user_id: id })
+        await UserInfo.deleteMany({ user_id: id })
         res.status(200).send({
             apiStatus: true,
             success: data,
