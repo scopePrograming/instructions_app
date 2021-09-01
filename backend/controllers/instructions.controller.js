@@ -23,14 +23,24 @@ const uploadFile = multer({ storage })
 const downloadFile = async (req, res) => {
     try {
         let fileName = req.params.fileName
+        let findFileName = await Instructions.find({fileName})
+        if (findFileName == '') throw new Error(`No file`)
         
         await req.user.populate({
             path: 'instructionUser',
         }).execPopulate()
         let data = req.user.instructionUser
-        data.forEach(instruct => {
-            if (instruct.fileName == req.params.fileName) res.download(`./uploads/${fileName}`)
-        })
+
+        // let sd = data.every(instruct => fileName.includes(instruct))
+        // console.log(sd)
+        
+        res.status(200).download(`./uploads/${ fileName }`)
+        // data.forEach(instruct => {
+        //     console.log(instruct)
+        //     if (instruct.fileName !== req.params.fileName) throw new Error(`Can't file downlaoded`) 
+            
+        //     // else throw new Error(`Erro`)
+        // })
         // res.status(200).send({
         //     apiStatus: true,
         //     message: `File downloded`
@@ -119,7 +129,7 @@ const showAllInstructionsUser = async (req, res) => {
             path: 'instructionUser',
         }).execPopulate()
         let data = req.user.instructionUser
-        
+        if(data == '') throw new Error(`No instructions`)
         res.status(200).send({
             apiStatus: true,
             success: data,
