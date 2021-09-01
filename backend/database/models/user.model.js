@@ -4,11 +4,6 @@ const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
-// To used instruction
-const Instruction = require('./instructions.model')
-
-// To used userData
-const userInfo = require('./userInfo.model')
 
 // Create user schema
 const userSchema = mongoose.Schema({

@@ -9,6 +9,7 @@ const addUserInfo = async (req, res) => {
         let userInfo = await UserInfo.findOne({ user_id })
         if (userInfo) {
             let objkeys = Object.keys(req.body)
+            if (objkeys.length == 0) throw new Error(`Please insert data`)
             objkeys.forEach(info => userInfo[info] = req.body[info])
             await userInfo.save()
             res.status(200).send({
@@ -55,7 +56,7 @@ const showAllUserInfo = async (req, res) => {
         res.status(500).send({
             status: false,
             result: error,
-            message: 'There are no users'
+            message: 'There are no user information'
         })
     }
 
