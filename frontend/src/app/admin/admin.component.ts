@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-admin',
@@ -6,12 +7,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  
 
   sideBarOpen = true
+  
 
   constructor() {
     
   }
+
 
   ngOnInit(): void {
     this.heddinSideBar()

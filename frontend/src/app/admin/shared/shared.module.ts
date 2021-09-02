@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog'
 
 
@@ -40,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog'
     MatMenuModule,
     MatToolbarModule,
     MatCardModule,
+    MatSidenavModule,
   ],
   exports: [
     NavbarComponent,

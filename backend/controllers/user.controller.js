@@ -27,7 +27,6 @@ const userRegister = async (req, res) => {
 // Login user
 const userLogin = async (req, res) => {
     try {
-
         let user = await User.logMeOn(req.body.email, req.body.password)
         let token = await user.generateAuthToken()
         res.status(200).send({

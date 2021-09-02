@@ -31,16 +31,12 @@ const downloadFile = async (req, res) => {
         }).execPopulate()
         let data = req.user.instructionUser
 
-        // let sd = data.every(instruct => fileName.includes(instruct))
-        // console.log(sd)
-        
-        res.status(200).download(`./uploads/${ fileName }`)
-        // data.forEach(instruct => {
-        //     console.log(instruct)
-        //     if (instruct.fileName !== req.params.fileName) throw new Error(`Can't file downlaoded`) 
+        data.forEach(instruct => {
+            console.log(instruct)
+            if (instruct.fileName == req.params.fileName) res.status(200).download(`./uploads/${ fileName }`)
             
-        //     // else throw new Error(`Erro`)
-        // })
+            else { throw new Error(`Can't file downlaoded`) }
+        })
         // res.status(200).send({
         //     apiStatus: true,
         //     message: `File downloded`

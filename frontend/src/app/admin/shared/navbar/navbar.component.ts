@@ -1,5 +1,7 @@
-import { EventEmitter, Output } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { EventEmitter, Output, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { ServiceService } from '../../service.service';
 
@@ -9,11 +11,16 @@ import { ServiceService } from '../../service.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  
   checkStatus = localStorage.getItem('status')
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter()
   
-  constructor(private _userService: ServiceService, private _router: Router) { }
+  constructor(
+    private _userService: ServiceService,
+    private _router: Router,
+    
+  ) { }
 
   ngOnInit(): void {
   }
@@ -51,3 +58,7 @@ export class NavbarComponent implements OnInit {
   }
 
 }
+function delay(arg0: number): import("rxjs").OperatorFunction<import("@angular/cdk/layout").BreakpointState, unknown> {
+  throw new Error('Function not implemented.');
+}
+
