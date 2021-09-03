@@ -13,23 +13,26 @@ export class EditSingleInstructionComponent implements OnInit {
   hide = true;
   result: any = {}
   msgCheck: any = null
-
   isSubmited: boolean = false
   flag: boolean = false
-  headTitle: String = 'Add instructions'
-  userId: any = this.router.snapshot.paramMap.get('id')
+  headTitle: String = 'Edit instructions'
+  singleInstruction: any = []
+  id = this.router.snapshot.paramMap.get('id')
   
   instructionData : FormGroup = this.fb.group({
-    // cat_id: ['',[Validators.required]],
     title: ['',[Validators.required , Validators.minLength(3) , Validators.maxLength(100)]],
     description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
     fileName: ['', [Validators.required]],
-    
   })
+  
 
-  constructor(private _Service: ServiceService , private _router:Router, private fb: FormBuilder,private router: ActivatedRoute ) { }
+  constructor(private _Service: ServiceService, private _router: Router, private fb: FormBuilder, private router: ActivatedRoute) {
+    this.getOldDataInstruction()
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   
   uploadFile(event:any){
@@ -37,45 +40,67 @@ export class EditSingleInstructionComponent implements OnInit {
     this.instructionData.get('fileName')?.setValue(file)
   }
 
-  addInstructionForm(){
-    let formData = new FormData()
-    formData.append('user_id', this.userId)
-    formData.append('title', this.instructionData.get('title')?.value)
-    formData.append('description', this.instructionData.get('description')?.value)
-    formData.append('fileName', this.instructionData.get('fileName')?.value)
+  
 
-    this.isSubmited = true
+// Store and show old data before update
+getOldDataInstruction () {
+  this._Service.showSingleInstruction(this.id).subscribe(
+    (res) => { this._Service.singleInstruction = res.success }
+  )
+    this.instructionData.get('title')?.setValue(`${this._Service.singleInstruction.title}`)
+    this.instructionData.get('description')?.setValue(`${this._Service.singleInstruction.description}`)
+}
+  
 
-    if (this.instructionData.valid) {
-      
-      this._Service.addInstruction(formData).subscribe(
-        res => { this.result = res },
-    
-        (e) => { 
-          this.flag = false
-          this.msgCheck = e.error.message 
-        },
+editInstructionForm(){
+  let formData = new FormData()
+  formData.append('title', this.instructionData.get('title')?.value)
+  formData.append('description', this.instructionData.get('description')?.value)
+  formData.append('fileName', this.instructionData.get('fileName')?.value)
 
-        () => {
-          if(this.result?.success != "") { 
-            this.flag = true
-            this.msgCheck = this.result.message
-            this.instructionData.reset()
-            this.isSubmited = false 
-            this._router.navigate(['/instructions'])
-          } 
-        }
-    
-      )
-    }
+  this.isSubmited = true
+
+  if (this.instructionData.valid) {
+    this._Service.editSingleInstruction(this.id, formData).subscribe(
+      res => { this.result = res },
+  
+      (e) => { 
+        this.flag = false
+        this.msgCheck = e.error.message 
+      },
+
+      () => {
+        if(this.result?.success != "") { 
+          this.flag = true
+          this.msgCheck = this.result.message
+          this.instructionData.reset()
+          this.isSubmited = false 
+          this._router.navigate(['/instructions'])
+        } 
+      }
+  
+    )
   }
+}
 
-  get title() {
-    return this.instructionData.get('title')
-  }
+get title() {
+  return this.instructionData.get('title')
+}
 
-  get description() {
-    return this.instructionData.get('description')
-  }
+get description() {
+  return this.instructionData.get('description')
+}
+
+
 
 }
+
+  
+  
+  
+  
+  
+  
+
+
+  

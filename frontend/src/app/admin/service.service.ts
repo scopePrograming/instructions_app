@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ServiceService {
   private commonURL = `http://localhost:3000/user/`
   private commonAdminURL = `http://localhost:3000/admin/`
+  singleInstruction: any;
   constructor(private _http: HttpClient) { }
 
   showAllUsers(): Observable<any> {
@@ -52,8 +53,8 @@ export class ServiceService {
     return this._http.get(`${this.commonAdminURL}showInstructionsUser/${id}`)
   }
 
-  editSingleInstruction(id: any): Observable<any> {
-    return this._http.patch(`${this.commonAdminURL}editSingleInstruction/${id}`, null)
+  editSingleInstruction(id: any, data: any): Observable<any> {
+    return this._http.patch(`${this.commonAdminURL}editSingleInstruction/${id}`, data)
   }
 
   deleteSingleInstruction(id: any): Observable<any> {

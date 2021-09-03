@@ -1,7 +1,7 @@
 <mat-card class="add_instructions">
-
+    {{instructionData}}
     <form class="example-container add_instructions-form" [formGroup]="instructionData" autocomplete="off"
-        (ngSubmit)='addInstructionForm()'>
+        (ngSubmit)='editInstructionForm()'>
 
         <mat-form-field hintLabel="Max 100 characters" appearance="fill">
             <mat-label>Title</mat-label>

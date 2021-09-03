@@ -1,4 +1,6 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 
 @Component({
@@ -9,22 +11,12 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 export class AdminComponent implements OnInit {
   
 
-  sideBarOpen = true
+  sideBarOpen = false
+
+  constructor() { }
+
+  ngOnInit(): void { }
   
-
-  constructor() {
-    
-  }
-
-
-  ngOnInit(): void {
-    this.heddinSideBar()
-  }
-  
-  heddinSideBar() {
-    window.innerWidth > 991 ? this.sideBarOpen = true : this.sideBarOpen = false
-  }
-
   sideBarToggler(event: any) {
     this.sideBarOpen = !this.sideBarOpen
   }

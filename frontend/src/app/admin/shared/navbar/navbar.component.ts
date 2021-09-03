@@ -11,7 +11,7 @@ import { ServiceService } from '../../service.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  
+  sideBarOpen = false
   checkStatus = localStorage.getItem('status')
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter()
@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
 
   toggleSideBar() {
     this.toggleSideBarForMe.emit()
+    this.sideBarOpen = !this.sideBarOpen
     setTimeout(() => {
       window.dispatchEvent(
         new Event('resize')
