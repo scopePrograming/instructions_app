@@ -18,14 +18,14 @@ export class ShowallinstructionsComponent implements OnInit {
   headTitle: string = 'Instructions'
 
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['Title', 'Description', 'FileName' ,'Actions'];
-  
+  displayedColumns: string[] = ['Title', 'Description', 'FileName', 'Actions'];
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private _Service: ServiceService, private _router: Router) {
-    
+
   }
 
   ngOnInit(): void {
@@ -51,9 +51,7 @@ export class ShowallinstructionsComponent implements OnInit {
   deleteByAdmin(id: any) {
     this._Service.deleteSingleInstruction(id).subscribe(res => { },
       () => { },
-      () => {
-        this._router.navigate(['/instructions'])
-      })
+      () => { this._router.navigate(['/instructions']) })
   }
 
 

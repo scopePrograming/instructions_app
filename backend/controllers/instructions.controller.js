@@ -10,11 +10,11 @@ let fileName = ''
 
 // Uplaoded file
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) { cb (null, 'uploads') },
+    destination: function (req, file, cb) { cb(null, 'uploads') },
     filename: function (req, file, cb) {
         // fileName = `${Date.now()}.${(file.originalname.split('.').pop())}`
         fileName = `${Date.now()}_${file.originalname}`
-        cb (null, fileName)
+        cb(null, fileName)
     }
 })
 const uploadFile = multer({ storage })
@@ -23,20 +23,20 @@ const uploadFile = multer({ storage })
 const downloadFile = async (req, res) => {
     try {
         let fileName = req.params.fileName
-        let findFileName = await Instructions.find({fileName})
+        let findFileName = await Instructions.find({ fileName })
         if (findFileName == '') throw new Error(`No file`)
-        
-        await req.user.populate({
-            path: 'instructionUser',
-        }).execPopulate()
-        let data = req.user.instructionUser
 
-        data.forEach(instruct => {
-            console.log(instruct)
-            if (instruct.fileName == req.params.fileName) res.status(200).download(`./uploads/${ fileName }`)
-            
-            else { throw new Error(`Can't file downlaoded`) }
-        })
+        // await req.user.populate({
+        //     path: 'instructionUser',
+        // }).execPopulate()
+        // let data = req.user.instructionUser
+
+        // data.forEach(instruct => {
+        //     if (instruct.fileName == req.params.fileName) return
+
+        //     else { throw new Error(`Can't file downlaoded`) }
+        // })
+        res.status(200).download(`./uploads/${fileName}`)
         // res.status(200).send({
         //     apiStatus: true,
         //     message: `File downloded`
@@ -59,7 +59,7 @@ const addInstruction = async (req, res) => {
         let instruction = new Instructions({ ...req.body })
         instruction.fileName = fileName
         instruction.filePath = req.file.path
-        
+
         await instruction.save()
         res.status(200).send({
             apiStatus: true,
@@ -78,17 +78,17 @@ const addInstruction = async (req, res) => {
 
 // Show all instructions (by admin)
 const showAllInstructions = async (req, res) => {
-     try {
+    try {
         let instruction = await Instructions.find()
         if (instruction == '') throw new Error(`Data not founded, Please insert any data`)
-        
+
         res.status(200).send({
             apiStatus: true,
             success: instruction,
             message: `All data for users`
         })
-     }
-     catch (error) {
+    }
+    catch (error) {
         res.status(500).send({
             apiStatus: false,
             result: error.message,
@@ -125,7 +125,7 @@ const showAllInstructionsUser = async (req, res) => {
             path: 'instructionUser',
         }).execPopulate()
         let data = req.user.instructionUser
-        if(data == '') throw new Error(`No instructions`)
+        if (data == '') throw new Error(`No instructions`)
         res.status(200).send({
             apiStatus: true,
             success: data,
@@ -143,7 +143,7 @@ const showAllInstructionsUser = async (req, res) => {
 
 // Show single instruction (by admin)
 const showSingleInstruction = async (req, res) => {
-     try {
+    try {
         let id = req.params.id
         let data = await Instructions.findById(id)
         if (!data) throw new Error(`The instructions not found`)
@@ -169,28 +169,28 @@ const editSingleInstruction = async (req, res) => {
         let id = req.params.id
         let data = await Instructions.findById(id)
         if (!data) throw new Error(`The instruction not found`)
-        
+
         let objkeys = Object.keys(req.body)
         if (objkeys.length == 0) throw new Error(`Please insert data`)
-    
+
         let allowUpdate = ['title', 'description', 'fileName']
         let validUpdate = objkeys.every(instruct => allowUpdate.includes(instruct))
 
         if (!validUpdate) throw new Error(`Allowed update ${allowUpdate} only`)
-    
+
         let oldFileName = data.fileName
         data.fileName = fileName
         data.filePath = req.file.path
         objkeys.forEach(instruct => data[instruct] = req.body[instruct])
 
-        fs.unlink(`uploads/${oldFileName}`, (error) => { if (error) `Error file` })
+        fs.unlink(`uploads/${oldFileName}`, (error) => { if (error)`Error file` })
 
         await data.save()
         res.status(200).send({
             apiStatus: true,
             message: `Updated success`
         })
-    } 
+    }
     catch (error) {
         res.status(500).send({
             apiStatus: false,
@@ -205,9 +205,9 @@ const deleteSingleInstruction = async (req, res) => {
     try {
         let id = req.params.id
         let data = await Instructions.findByIdAndDelete(id)
-        
+
         if (!data) throw new Error(`The instruction not found`)
-        fs.unlink(`uploads/${data.fileName}`, (error) => { if (error) `Error file` })
+        fs.unlink(`uploads/${data.fileName}`, (error) => { if (error)`Error file` })
         res.status(200).send({
             apiStatus: true,
             success: data,
@@ -233,7 +233,7 @@ module.exports = {
     showAllInstructions,
     showAllInstructionsForUser,
     showAllInstructionsUser,
-    
+
     showSingleInstruction,
 
     editSingleInstruction,

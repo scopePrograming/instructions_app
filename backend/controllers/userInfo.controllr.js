@@ -86,13 +86,13 @@ const showSingleUserInfoForUser = async (req, res) => {
 const showsingleUserInfo = async (req, res) => {
     try {
         let id = req.params.id
-        let userInfo = await UserInfo.find({ user_id: id })
-        if (userInfo == '') throw new Error(`The user information not found`)
+        let userInfo = await UserInfo.findOne({ user_id: id })
+        if (!userInfo) throw new Error(`The user information not found`)
 
         res.status(200).send({
             apiStatus: true,
             success: userInfo,
-            message: `this single user information`
+            message: `This single user information`
         })
     }
     catch (error) {

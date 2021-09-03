@@ -60,5 +60,13 @@ export class ServiceService {
     return this._http.delete(`${this.commonAdminURL}deleteSingleInstruction/${id}`)
   }
 
+  //-- Services to user info --//
+  showAllUserInfo(): Observable<any> {
+    return this._http.post(`${this.commonAdminURL}showAllUserInfo`, null)
+  }
+
+  showSingleUserInfo(id: any): Observable<any> {
+    return this._http.get(`${this.commonAdminURL}showsingleUserInfo/${id}`)
+  }
 
 }

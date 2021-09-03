@@ -22,15 +22,18 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
-      
+
       { path: 'instructions', component: ShowallinstructionsComponent },
       { path: 'showsingleinstruction/:id', component: ShowSingleInstructionComponent },
       { path: 'addinstruction/:id', component: AddinstructionsComponent },
       { path: 'editinstruction/:id', component: EditSingleInstructionComponent },
       { path: 'showinstructionsuser/:id', component: ShowInstructionsUserComponent },
+      { path: 'deleteInstrucion/:id', component: ShowallinstructionsComponent },
 
       { path: 'users', component: ShowallusersComponent },
       { path: 'singleUser/:id', component: ShowsingleuserComponent },
+      { path: 'deleteuser/:id', component: ShowallusersComponent },
+
     ]
   },
   { path: '**', component: NotfoundpageComponent }

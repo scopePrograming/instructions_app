@@ -11,13 +11,15 @@ export class ShowsingleuserComponent implements OnInit {
 
   singleInstruction: any = []
   singleUser: any = []
+  singleUserInfo: any = []
   result: any = {}
   msgCheck: any = null
   headTitle: string = 'Data of user'
- 
+  id = this.router.snapshot.paramMap.get('id')
+
   constructor(public _userService: ServiceService, private router: ActivatedRoute, private _router: Router) {
     this.getSingleUser()
-    
+    this.getSingleUserInfo()
   }
 
   ngOnInit(): void {
@@ -25,8 +27,7 @@ export class ShowsingleuserComponent implements OnInit {
   }
 
   getSingleUser() {
-    let id = this.router.snapshot.paramMap.get('id')
-    this._userService.showSingleUser(id).subscribe(res => {
+    this._userService.showSingleUser(this.id).subscribe(res => {
       this.result = res
       this.singleUser = this.result.success
     },
@@ -39,11 +40,22 @@ export class ShowsingleuserComponent implements OnInit {
   }
 
   getSingleInstruction() {
-    let id = this.router.snapshot.paramMap.get('id')
-    this._userService.showInstructionsUser(id).subscribe(res => {
+    this._userService.showInstructionsUser(this.id).subscribe(res => {
       this.result = res
       this.singleInstruction = this.result.success
-      console.log(this.singleInstruction)
+    },
+      (e) => {
+        this.msgCheck = e.error.message
+      },
+      () => {
+        this.msgCheck = this.result.message
+      })
+  }
+
+  getSingleUserInfo() {
+    this._userService.showSingleUserInfo(this.id).subscribe(res => {
+      this.result = res
+      this.singleUserInfo = this.result.success
     },
       (e) => {
         this.msgCheck = e.error.message

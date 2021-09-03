@@ -21,18 +21,18 @@ export class ShowallusersComponent implements OnInit {
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['Name', 'Email', 'Actions'];
-  
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private _userService: ServiceService, private _router: Router) {
-    
+
     // Create 100 users
     // this.users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
-    
+
   }
 
   ngOnInit(): void {
@@ -59,9 +59,7 @@ export class ShowallusersComponent implements OnInit {
 
     this._userService.deleteUserByAdmin(id).subscribe(res => { },
       () => { },
-      () => {
-        this._router.navigate(['/users'])
-      })
+      () => { this._router.navigate(['/users']) })
   }
 
 }
