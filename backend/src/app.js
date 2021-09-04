@@ -1,6 +1,9 @@
 // Express 
 const express = require('express')
 
+// Path
+const path = require('path')
+
 // Cors
 const cors = require('cors')
 
@@ -13,8 +16,14 @@ const userRoute = require('../routes/user.route')
 const instructionsRoute = require('../routes/instructions.route')
 const userInfoRoute = require('../routes/userInfo.route')
 
+
 // Fire to used express
 const app = express()
+
+
+// Static public folder
+app.use(express.static(path.join(__dirname, '../public/dist/frontend')))
+
 
 // Used express json $ cors
 app.use(express.json())
