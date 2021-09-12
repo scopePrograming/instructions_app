@@ -33,18 +33,13 @@ const userInfoSchema = mongoose.Schema({
         trim: true,
         required: true,
     },
-    activityLevel: {
+    notes: {
         type: String,
-        enum: ['Moderately Active'],
+        trim: true,
         required: true,
-        trim: true
-    },
-    goal: {
-        type: String,
-        enum: ['Loose Weight'],
-        required: true,
-        trim: true
-    },
+        minlength: 3,
+        maxlength: 1000
+    }
 }, { timestamps: true })
 
 

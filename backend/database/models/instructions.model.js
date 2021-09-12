@@ -35,22 +35,7 @@ const instructionSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-    },
-    // // Tsting array files
-    // files: [
-    //     {
-    //         fileName: {
-    //             type: String,
-    //             trim: true,
-    //             required: true,
-    //         },
-    //         filePath: {
-    //             type: String,
-    //             trim: true,
-    //             required: true,
-    //         }
-    //     }  
-    // ]
+    }
 }, { timestamps: true })
 
 

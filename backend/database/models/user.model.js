@@ -7,14 +7,13 @@ const bcrypt = require('bcryptjs')
 
 // Create user schema
 const userSchema = mongoose.Schema({
-    firstName: {
+    userType: {
         type: String,
-        trim: true,
-        required: true,
-        minlength: 3,
-        maxlength: 20
+        enum: ['admin', 'user'],
+        default: 'user',
+        trim: true
     },
-    lastName: {
+    userName: {
         type: String,
         trim: true,
         required: true,
@@ -36,28 +35,9 @@ const userSchema = mongoose.Schema({
         required: true,
         minlength: 8
     },
-    phone: {
+    referenceId: {
         type: String,
         trim: true,
-        required: true,
-        unique: [true, `Phone has token`],
-        validate(value) { // We need to valid all world
-            if (!validator.isMobilePhone(value, 'ar-EG')) throw new Error('invalid phone')
-        }
-    },
-    userType: {
-        type: String,
-        enum: ['admin', 'user'],
-        default: 'user',
-        trim: true
-    },
-    imageName: {
-        type: String,
-        trim: true
-    },
-    imagePath: {
-        type: String,
-        trim: true
     },
     tokens: [
         {
@@ -73,7 +53,7 @@ userSchema.virtual('instructionUser', {
     foreignField: 'user_id'
 })
 
-userSchema.virtual('userInfo', {
+userSchema.virtual('userInformation', {
     ref: 'userInfo',
     localField: '_id',
     foreignField: 'user_id'

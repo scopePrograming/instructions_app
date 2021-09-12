@@ -62,12 +62,9 @@ export class ServiceService {
   }
 
   //-- Services to user info --//
-  showAllUserInfo(): Observable<any> {
-    return this._http.post(`${this.commonAdminURL}showAllUserInfo`, null)
-  }
 
   showSingleUserInfo(id: any): Observable<any> {
-    return this._http.get(`${this.commonAdminURL}showsingleUserInfo/${id}`)
+    return this._http.get(`${this.commonAdminURL}showAllUserInfoByAdmin/${id}`)
   }
 
 }

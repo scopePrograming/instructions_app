@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
 
   toggleSideBar() {
     this.toggleSideBarForMe.emit()
-    this.sideBarOpen = !this.sideBarOpen
+    // this.sideBarOpen = !this.sideBarOpen
     setTimeout(() => {
       window.dispatchEvent(
         new Event('resize')

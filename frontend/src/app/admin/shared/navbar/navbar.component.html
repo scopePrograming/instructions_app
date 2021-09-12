@@ -1,12 +1,12 @@
 <mat-toolbar color="primary" class="nav_toolbar">
     <mat-toolbar-row>
-        <button mat-icon-button class="example-icon" *ngIf="sideBarOpen === false" value="left" aria-label="Text align right" (click)="toggleSideBar()">
+        <button mat-icon-button class="example-icon" value="left" aria-label="Text align right" (click)="toggleSideBar()">
             <mat-icon>format_align_left</mat-icon>
         </button>
-        <button mat-icon-button class="example-icon" *ngIf="sideBarOpen !== false" aria-label="Text align right"
+        <!-- <button mat-icon-button class="example-icon" *ngIf="sideBarOpen !== false" aria-label="Text align right"
             (click)="toggleSideBar()">
             <mat-icon>close</mat-icon>
-        </button>
+        </button> -->
         <span>Dashboard</span>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">

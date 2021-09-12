@@ -10,21 +10,24 @@ const auth = require('../middleware/auth')
 // userInfo controllers
 const userInfoController = require('../controllers/userInfo.controllr')
 
-// add userInfo
+// add user Info 
 router.post(
     '/user/addUserInfo',
     auth.userAuth,
     userInfoController.addUserInfo
 )
 
-// Show all userInfo (by admin)
-router.post('/admin/showAllUserInfo', auth.adminAuth, userInfoController.showAllUserInfo)
+// Edit user info (by user)
+router.patch('/user/editSingleInfo/:id', auth.userAuth, userInfoController.editSingleInfo)
 
-// Show single userInfo (by user)
-router.post('/user/showSingleUserInfoForUser', auth.userAuth, userInfoController.showSingleUserInfoForUser)
+// Show single user info (by user)
+router.get('/user/showSingleInfo/:id', auth.userAuth, userInfoController.showSingleInfo)
 
-// Show all instructions for one user
-router.get('/admin/showsingleUserInfo/:id', auth.adminAuth, userInfoController.showsingleUserInfo)
+// Show all user Info (by user)
+router.post('/user/showAllUserInfoByUser', auth.userAuth, userInfoController.showAllUserInfoByUser)
+
+// Show all user info (by admin)
+router.get('/admin/showAllUserInfoByAdmin/:id', auth.adminAuth, userInfoController.showAllUserInfoByAdmin)
 
 // To export router
 module.exports = router

@@ -22,7 +22,7 @@ const app = express()
 
 
 // Static public folder
-app.use(express.static(path.join(__dirname, '../public/dist/frontend')))
+app.use(express.static(path.join(__dirname, '../public/')))
 
 
 // Used express json $ cors
