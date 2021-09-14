@@ -5,11 +5,11 @@ const User = require('../database/models/user.model')
 // add user info (by user)
 const addUserInfo = async (req, res) => {
     try {
+
         let userInfo = new UserInfo({
             ...req.body,
             'user_id': req.user._id
         })
-
 
         await userInfo.save()
         res.status(200).send({

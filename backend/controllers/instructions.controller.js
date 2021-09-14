@@ -7,49 +7,17 @@ const Instructions = require('../database/models/instructions.model')
 const User = require('../database/models/user.model')
 
 let fileName = ''
+let errorExt = ''
 
 // Uplaoded file
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { cb(null, 'uploads') },
     filename: function (req, file, cb) {
-        // fileName = `${Date.now()}.${(file.originalname.split('.').pop())}`
-        fileName = `${Date.now()}_${file.originalname}`
+        fileName = `${Date.now()}.${(file.originalname.split('.').pop())}`
         cb(null, fileName)
     }
 })
 const uploadFile = multer({ storage })
-
-// Download files by users
-const downloadFile = async (req, res) => {
-    try {
-        let fileName = req.params.fileName
-        let findFileName = await Instructions.find({ fileName })
-        if (findFileName == '') throw new Error(`No file`)
-
-        // await req.user.populate({
-        //     path: 'instructionUser',
-        // }).execPopulate()
-        // let data = req.user.instructionUser
-
-        // data.forEach(instruct => {
-        //     if (instruct.fileName == req.params.fileName) return
-
-        //     else { throw new Error(`Can't file downlaoded`) }
-        // })
-        res.status(200).download(`./uploads/${fileName}`)
-        // res.status(200).send({
-        //     apiStatus: true,
-        //     message: `File downloded`
-        // })
-    }
-    catch (error) {
-        res.status(500).send({
-            apiStatus: false,
-            result: error.message,
-            message: `Can't download file`
-        })
-    }
-}
 
 // Replay on the users (add instruction) (by admin)
 const addInstruction = async (req, res) => {
@@ -57,9 +25,11 @@ const addInstruction = async (req, res) => {
         let user = await User.findById(req.body.user_id)
         if (!user) throw new Error(`User not founded`)
         let instruction = new Instructions({ ...req.body })
+        if (req.file.mimetype !== 'image/gif') throw new Error(`Please upload a file type of gif`)
+
         instruction.fileName = fileName
         instruction.filePath = req.file.path
-
+        
         await instruction.save()
         res.status(200).send({
             apiStatus: true,
@@ -226,7 +196,6 @@ const deleteSingleInstruction = async (req, res) => {
 // Exports
 module.exports = {
     uploadFile,
-    downloadFile,
 
     addInstruction,
 

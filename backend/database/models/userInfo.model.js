@@ -39,6 +39,11 @@ const userInfoSchema = mongoose.Schema({
         required: true,
         minlength: 3,
         maxlength: 1000
+    },
+    payment: {
+        type: Boolean,
+        enum: [true, false],
+        default: false
     }
 }, { timestamps: true })
 

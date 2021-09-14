@@ -28,7 +28,6 @@ const userLogin = async (req, res) => {
     try {
         let user = await User.logMeOn(req.body.email, req.body.password)
         let token = await user.generateAuthToken()
-        
         user.referenceId = Math.floor((Math.random() * 10)  * Date.now()).toString().slice(0, 8)
     
         res.status(200).send({
