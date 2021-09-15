@@ -15,6 +15,8 @@ require('../database/connection')
 const userRoute = require('../routes/user.route')
 const instructionsRoute = require('../routes/instructions.route')
 const userInfoRoute = require('../routes/userInfo.route')
+const passwordReset = require('../routes/passwordReset.route')
+
 
 
 // Fire to used express
@@ -36,6 +38,9 @@ app.use(cors())
 app.use(userRoute)
 app.use(instructionsRoute)
 app.use(userInfoRoute)
+
+// Reset pass
+app.use("/api/password-reset", passwordReset)
 
 // Exports
 module.exports = app
