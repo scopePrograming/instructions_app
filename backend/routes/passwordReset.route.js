@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
         if (!token) {
             token = await new Token({
                 user_id: user._id,
-                token: crypto.randomBytes(32).toString("hex"),
+                token: crypto.randomBytes(32).toString("hex")
             }).save()
         }
 

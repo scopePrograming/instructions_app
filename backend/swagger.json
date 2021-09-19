@@ -1,0 +1,221 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample api to instructions app .",
+    "version": "1.0.0",
+    "title": "Instructions App",
+    "termsOfService": "",
+    "contact": {
+      "email": ""
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations about user"
+    }
+  ],
+  "schemes": ["http"],
+
+  "paths": {
+    "/user/register": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Create user (register)",
+        "description": "This can only be done by register user.",
+        "operationId": "register",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/admin/all": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Show  all user",
+        "description": "All user.",
+        "operationId": "show",
+        "produces": ["application/json", "application/xml"],
+
+        "responses": {},
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/admin/delUser/{id}": {
+      "delete": {
+        "tags": ["user"],
+        "summary": "delete users by admin",
+        "description": "Delete user",
+        "operationId": "delOfUser",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+
+        "responses": {},
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/user/createWithArray": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Creates list of users with given input array",
+        "operationId": "createUsersWithArrayInput",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of user object",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/createWithList": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Creates list of users with given input array",
+        "operationId": "createUsersWithListInput",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of user object",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Logs user into the system",
+        "operationId": "login",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Email and password",
+            "description": "Enter your email and Password to login",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": ["user"],
+        "summary": "Logs out current logged in user session",
+        "operationId": "logoutUser",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/delete": {
+      "delete": {
+        "tags": ["user"],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "produces": ["application/json", "application/xml"],
+
+        "responses": {},
+        "security": [{ "bearerAuth": [] }]
+      }
+    }
+  },
+  "swaggerDefinition": {
+    "security": [{ "bearerAuth": [] }]
+  },
+
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit"
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "scheme": "bearer",
+      "in": "header"
+    }
+  },
+
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -28,8 +28,13 @@ const userLogin = async (req, res) => {
     try {
         let user = await User.logMeOn(req.body.email, req.body.password)
         let token = await user.generateAuthToken()
-        user.referenceId = Math.floor((Math.random() * 10)  * Date.now()).toString().slice(0, 8)
-    
+        // let referenceID = Math.floor((Math.random() * 10)  * Date.now()).toString().slice(0, 8)
+        // user.referenceId = referenceID
+        // if(!user.referenceId) 
+        // console.log(user.referenceId)
+        let uniqeId = user._id.toString()
+        let referenceUniqeId = uniqeId.substring(uniqeId.length, uniqeId.length - 8)
+        user.referenceId = referenceUniqeId
         res.status(200).send({
             status: true,
             success: { token, user },
