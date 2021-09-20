@@ -31,9 +31,9 @@ router.delete('/api/user/delete', auth.userAuth, userController.deleteUser)
 router.delete('/api/admin/delUser/:id', auth.adminAuth, userController.deleteUserByAdmin)
 
 // logout any user or admin
-router.post('/user/logout', auth.generalAuth, userController.logOut)
+router.post('/api/user/logout', auth.generalAuth, userController.logOut)
 
-router.post('/user/logoutAll', auth.generalAuth, userController.logOutAll)
+router.post('/api/user/logoutAll', auth.generalAuth, userController.logOutAll)
 
 // To export router
 module.exports = router

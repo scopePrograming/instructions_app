@@ -12,27 +12,27 @@ const instructionController = require('../controllers/instructions.controller')
 
 // Replay on the users (add instructions)
 router.post(
-    '/admin/addInstruction',
+    '/api/admin/addInstruction',
     auth.adminAuth,
     instructionController.uploadFile.single('fileName'),
     instructionController.addInstruction
 )
 
 // Show all instructions
-router.post('/admin/showInstructions', auth.adminAuth, instructionController.showAllInstructions)
+router.post('/api/admin/showInstructions', auth.adminAuth, instructionController.showAllInstructions)
 
 // Show all instructions for user (by user)
-router.post('/user/showInstruction', auth.userAuth, instructionController.showAllInstructionsUser)
+router.post('/api/user/showInstruction', auth.userAuth, instructionController.showAllInstructionsUser)
 
 // Show all instructions for one user
-router.get('/admin/showInstructionsUser/:id', auth.adminAuth, instructionController.showAllInstructionsForUser)
+router.get('/api/admin/showInstructionsUser/:id', auth.adminAuth, instructionController.showAllInstructionsForUser)
 
 // Show single instruction
-router.get('/admin/showSingleInstruction/:id', auth.adminAuth, instructionController.showSingleInstruction)
+router.get('/api/admin/showSingleInstruction/:id', auth.adminAuth, instructionController.showSingleInstruction)
 
 // Edit single instruction
 router.patch(
-    '/admin/editSingleInstruction/:id',
+    '/api/admin/editSingleInstruction/:id',
     auth.adminAuth,
     instructionController.uploadFile.single('fileName'),
     instructionController.editSingleInstruction
@@ -40,7 +40,7 @@ router.patch(
 
 // Delete single instruction
 router.delete(
-    '/admin/deleteSingleInstruction/:id',
+    '/api/admin/deleteSingleInstruction/:id',
     auth.adminAuth,
     instructionController.deleteSingleInstruction
 )
