@@ -32,8 +32,11 @@
                         <button mat-menu-item>
                             <mat-icon>edit</mat-icon> Edit
                         </button>
+                        <button mat-menu-item (click)="logout()">
+                            <mat-icon>exit_to_app</mat-icon> Logout
+                        </button>
                         <button mat-menu-item (click)="logoutAll()">
-                            <mat-icon>logout</mat-icon> Logout 
+                            <mat-icon>logout</mat-icon> Logout All
                         </button>
                     </mat-menu>
                 </li>

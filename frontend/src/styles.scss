@@ -14,7 +14,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 10px;
 }
 
 body::-webkit-scrollbar-track {
@@ -22,9 +22,13 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgb(15, 26, 128);
+  background-color: var(--main-color-blue);
   outline: 1px solid rgb(44, 92, 141);
   border-radius: 0.7rem;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(15, 26, 128);
 }
 
 ul {

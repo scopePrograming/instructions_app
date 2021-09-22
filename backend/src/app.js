@@ -15,7 +15,7 @@ require('../database/connection')
 const userRoute = require('../routes/user.route')
 const instructionsRoute = require('../routes/instructions.route')
 const userInfoRoute = require('../routes/userInfo.route')
-const passwordReset = require('../routes/passwordReset.route')
+// const passwordReset = require('../routes/passwordReset.route')
 
 
 
@@ -47,7 +47,7 @@ app.use(instructionsRoute)
 app.use(userInfoRoute)
 
 // Reset pass
-app.use("/api/password-reset", passwordReset)
+app.use("/api/password-reset", userRoute)
 
 // Exports
 module.exports = app

@@ -1,12 +1,12 @@
 .example-card {
   margin: 0.5rem 0;
+}
+
+.content_user_account {
   max-width: 20rem;
 }
 
 .user_info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   &-details {
     align-items: center;
     padding: 0.8rem;
@@ -21,15 +21,10 @@
     }
   }
 }
-.content_instruction_user {
-  display: grid;
-  grid-template-columns: repeat(2, 420px);
-  gap: 0.5rem;
-  @media all and (max-width: 991px) {
-    grid-template-columns: repeat(1, 320px);
-  }
-  .instruction_user {
-    width: 100vw;
-    border-left: 2px solid var(--main-color-blue);
+
+.instruction_user {
+  border-left: 2px solid var(--main-color-blue);
+  .image_exercise {
+    height: 300px;
   }
 }

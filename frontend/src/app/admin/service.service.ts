@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ServiceService {
-  private commonURL = `http://localhost:3000/user/`
-  private commonAdminURL = `http://localhost:3000/admin/`
+  private commonURL = `http://localhost:3000/api/user/`
+  private commonAdminURL = `http://localhost:3000/api/admin/`
   singleInstruction: any;
   constructor(private _http: HttpClient) { }
 

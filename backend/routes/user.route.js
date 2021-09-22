@@ -35,5 +35,11 @@ router.post('/api/user/logout', auth.generalAuth, userController.logOut)
 
 router.post('/api/user/logoutAll', auth.generalAuth, userController.logOutAll)
 
+// Forget password for user
+router.post("/api/password-reset", userController.forgetPasswordUser)
+
+// Reset password for user
+router.post("/:user_id/:token", userController.resetPasswordUser)
+
 // To export router
 module.exports = router

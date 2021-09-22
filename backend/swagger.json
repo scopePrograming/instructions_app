@@ -112,20 +112,13 @@
         "tags": ["user"],
         "summary": "Logs user into the system",
         "operationId": "login",
-        "consumes": ["application/x-www-form-urlencoded","multipart/form-data"],
+
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "email",
-            "in": "formData",
-            "description": "title of instruction",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "formData",
-            "description": "description of instruction",
+            "name": "email and password",
+            "in": "body",
+            "description": "Enter your email and password",
             "required": true,
             "type": "string"
           }
@@ -151,6 +144,56 @@
         "produces": ["application/json", "application/xml"],
         "responses": {},
         "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/password-reset": {
+      "post": {
+        "tags": ["user"],
+        "summary": "User forget password after register",
+        "operationId": "ForgetPassword",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "description": "Email for user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/password-reset/{user_id}/{token}": {
+      "post": {
+        "tags": ["user"],
+        "summary": "User reset password ",
+        "operationId": "ChangePassword",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "user token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Password",
+            "in": "body",
+            "description": "New password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
       }
     },
     "/user/delete": {
@@ -245,7 +288,7 @@
         "description": "This can only be done by login user.",
         "operationId": "showAllUserInfoByUser",
         "produces": ["application/json", "application/xml"],
-        
+
         "responses": {},
         "security": [{ "bearerAuth": [] }]
       }
@@ -277,11 +320,11 @@
         "summary": "add instructions",
         "description": "Replay on the users (add instructions)",
         "operationId": "addInstruction",
-        "consumes": ["application/x-www-form-urlencoded"],
+        "consumes": ["multipart/form-data"],
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "userId",
+            "name": "user_id",
             "in": "formData",
             "description": "Id of user to add instruction",
             "required": true,
@@ -302,7 +345,7 @@
             "type": "string"
           },
           {
-            "name": "file",
+            "name": "fileName",
             "in": "formData",
             "description": "file to upload (gif)",
             "required": true,
@@ -466,7 +509,7 @@
       "properties": {
         "gender": {
           "type": "string",
-          "enum":["Male","Female"]
+          "enum": ["Male", "Female"]
         },
         "height": {
           "type": "number"
@@ -501,4 +544,3 @@
     }
   }
 }
-

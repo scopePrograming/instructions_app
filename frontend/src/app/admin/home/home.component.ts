@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
   }
 
   deleteByAdmin(id: any) {
-
     this._userService.deleteUserByAdmin(id).subscribe(res => { },
       () => { },
       () => {

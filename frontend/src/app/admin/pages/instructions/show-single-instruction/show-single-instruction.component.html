@@ -1,9 +1,7 @@
 <mat-card-title>{{headTitle}}</mat-card-title>
 <mat-card class="example-card single_instruction">
-    <div>
-        <img src="http://localhost:3000/{{singleInstruction.fileName}}" alt="Traning gift">
-    </div>
     <mat-card-subtitle>{{singleInstruction.title}}</mat-card-subtitle>
+    <img mat-card-image class="image_exercise img-fluid img-thumbnail d-block mx-auto" src="http://localhost:3000/{{singleInstruction.fileName}}" alt="Exercise">
     <mat-card-content>
         {{singleInstruction.description}}
     </mat-card-content>
