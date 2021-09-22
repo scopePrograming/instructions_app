@@ -426,14 +426,36 @@
         "summary": "Edit single instruction ",
         "description": "This can only be done by login admin",
         "operationId": "editSingleInstruction",
+        "consumes": ["multipart/form-data"],
         "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of instruction",
+            "description": "Id of instruction",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "formData",
+            "description": "title of instruction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "description": "description of instruction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "formData",
+            "description": "file to upload (gif)",
+            "required": true,
+            "type": "file"
           }
         ],
 

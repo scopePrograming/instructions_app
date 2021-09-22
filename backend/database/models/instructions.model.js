@@ -34,7 +34,6 @@ const instructionSchema = mongoose.Schema({
     filePath: {
         type: String,
         trim: true,
-        required: true,
     }
 }, { timestamps: true })
 

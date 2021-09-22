@@ -29,6 +29,10 @@
           place-items: center;
           color: rgba(240, 232, 232, 0.884);
           font-size: 3.5rem;
+          user-select: none;
+        }
+        .file-error {
+          user-select: none;
         }
       }
 

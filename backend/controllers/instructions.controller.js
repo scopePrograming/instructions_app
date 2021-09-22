@@ -28,7 +28,6 @@ const addInstruction = async (req, res) => {
         if (req.file.mimetype !== 'image/gif') throw new Error(`Please upload a file type of gif`)
 
         instruction.fileName = fileName
-        instruction.filePath = req.file.path
         
         await instruction.save()
         res.status(200).send({
@@ -147,10 +146,12 @@ const editSingleInstruction = async (req, res) => {
         let validUpdate = objkeys.every(instruct => allowUpdate.includes(instruct))
 
         if (!validUpdate) throw new Error(`Allowed update ${allowUpdate} only`)
+        
+        if (req.file.mimetype !== 'image/gif') throw new Error(`Please upload a file type of gif`)
 
         let oldFileName = data.fileName
+        
         data.fileName = fileName
-        data.filePath = req.file.path
         objkeys.forEach(instruct => data[instruct] = req.body[instruct])
 
         fs.unlink(`uploads/${oldFileName}`, (error) => { if (error)`Error file` })
