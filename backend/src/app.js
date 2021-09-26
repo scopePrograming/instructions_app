@@ -24,8 +24,7 @@ const app = express()
 
 
 // Static upload folder
-app.use(express.static('uploads'))
-
+app.use(express.static(path.join(__dirname, '../uploads')))
 
 // Static public folder
 app.use(express.static(path.join(__dirname, '../public/')))

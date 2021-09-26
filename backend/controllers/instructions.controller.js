@@ -7,11 +7,13 @@ const Instructions = require('../database/models/instructions.model')
 const User = require('../database/models/user.model')
 
 let fileName = ''
-let errorExt = ''
+let folderName = path.join(__dirname, '../uploads')
+try { if (!fs.existsSync(folderName)) fs.mkdirSync(folderName) }
+catch (err) { }
 
 // Uplaoded file
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) { cb(null, 'uploads') },
+    destination: function (req, file, cb) { cb(null, path.join(__dirname,'../uploads')) },
     filename: function (req, file, cb) {
         fileName = `${Date.now()}.${(file.originalname.split('.').pop())}`
         cb(null, fileName)
